@@ -71,6 +71,11 @@ def test_only_runs_givens_and_cleanups_once_for_multiple_shoulds(testdir):
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
 
+def test_runs_cleanups_after_all_the_tests(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example7.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=2)
 
 def test_test_names(testdir):
     example = dedent(
