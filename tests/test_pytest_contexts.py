@@ -2,7 +2,7 @@ from textwrap import dedent
 import pathlib
 
 def test_basic_given_when_should(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example1.py'
+    example = pathlib.Path(__file__).parent / 'examples/example1.py'
     testdir.makepyfile(example.read_text())
 
     result = testdir.runpytest()
@@ -10,21 +10,21 @@ def test_basic_given_when_should(testdir):
 
 
 def test_two_shoulds_and_one_ignorable_class(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example2.py'
+    example = pathlib.Path(__file__).parent / 'examples/example2.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
 
 
 def test_we_still_run_regular_pytest_scripts(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example3.py'
+    example = pathlib.Path(__file__).parent / 'examples/example3.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
 
 
 def test_examples(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example4.py'
+    example = pathlib.Path(__file__).parent / 'examples/example4.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
@@ -60,21 +60,21 @@ def test_Spec_works(testdir):
 
 
 def test_decorators(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example5.py'
+    example = pathlib.Path(__file__).parent / 'examples/example5.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1)
 
 
 def test_only_runs_givens_and_cleanups_once_for_multiple_shoulds(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example6.py'
+    example = pathlib.Path(__file__).parent / 'examples/example6.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
 
 
 def test_runs_cleanups_after_all_the_tests(testdir):
-    example = pathlib.Path(__file__).parent / '../examples/example7.py'
+    example = pathlib.Path(__file__).parent / 'examples/example7.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
