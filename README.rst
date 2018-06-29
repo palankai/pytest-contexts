@@ -14,67 +14,31 @@ pytest-contexts
     :target: https://travis-ci.org/hjwp/pytest-contexts
     :alt: See Build Status on Travis CI
 
-.. image:: https://ci.appveyor.com/api/projects/status/github/hjwp/pytest-contexts?branch=master
-    :target: https://ci.appveyor.com/project/hjwp/pytest-contexts/branch/master
-    :alt: See Build Status on AppVeyor
-
 A plugin to run tests written with the Contexts framework using pytest
-
-----
-
-This `pytest`_ plugin was generated with `Cookiecutter`_ along with `@hackebrot`_'s `cookiecutter-pytest-plugin`_ template.
-
-
-Features
---------
-
-* TODO
-
-
-Requirements
-------------
-
-* TODO
-
-
-Installation
-------------
-
-You can install "pytest-contexts" via `pip`_ from `PyPI`_::
-
-    $ pip install pytest-contexts
-
 
 Usage
 -----
 
-* TODO
+First install with::
 
-Contributing
-------------
-Contributions are very welcome. Tests can be run with `tox`_, please ensure
-the coverage at least stays the same before you submit a pull request.
+    pip install pytest-contexts
+
+Once you've installed it, `pytest`_ will find and run tests written using the contexts `Given/When/should` conventions.
+
+Issues and PRs welcome.
+
 
 License
 -------
 
-Distributed under the terms of the `GNU GPL v3.0`_ license, "pytest-contexts" is free and open source software
+Distributed under the terms of the `Unlicense`_ license, "pytest-contexts" is free and open source software
 
+This `pytest`_ plugin was generated with `Cookiecutter`_ along with `@hackebrot`_'s `cookiecutter-pytest-plugin`_ template.
 
-Issues
-------
-
-If you encounter any problems, please `file an issue`_ along with a detailed description.
 
 .. _`Cookiecutter`: https://github.com/audreyr/cookiecutter
 .. _`@hackebrot`: https://github.com/hackebrot
-.. _`MIT`: http://opensource.org/licenses/MIT
-.. _`BSD-3`: http://opensource.org/licenses/BSD-3-Clause
-.. _`GNU GPL v3.0`: http://www.gnu.org/licenses/gpl-3.0.txt
-.. _`Apache Software License 2.0`: http://www.apache.org/licenses/LICENSE-2.0
 .. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
-.. _`file an issue`: https://github.com/hjwp/pytest-contexts/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
-.. _`tox`: https://tox.readthedocs.io/en/latest/
-.. _`pip`: https://pypi.org/project/pip/
-.. _`PyPI`: https://pypi.org/project
+.. _`Unlicense`: http://unlicense.org
+
