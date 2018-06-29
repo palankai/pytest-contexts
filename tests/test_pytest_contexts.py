@@ -20,3 +20,10 @@ def test_we_still_run_regular_pytest_scripts(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
+
+
+def test_examples(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example4.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=1, failed=1)
