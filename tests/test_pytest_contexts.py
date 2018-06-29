@@ -5,7 +5,6 @@ def test_basic_given_when_should(testdir):
     testdir.makepyfile(example.read_text())
 
     result = testdir.runpytest()
-    print(vars(result))
     result.assert_outcomes(passed=1)
 
 

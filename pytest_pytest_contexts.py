@@ -11,7 +11,6 @@ from contexts.plugins.identification import NameBasedIdentifier
 from contexts.plugins.identification.decorators import DecoratorBasedIdentifier
 
 def pytest_pycollect_makeitem(collector, name, obj):
-    print('colllecting', name, obj)
     if not inspect.isclass(obj):
         return
     if not name.lower().startswith('when'):
@@ -43,31 +42,33 @@ class ContextsCollector(pytest.Collector):
                 context_class.unbound_teardowns,
                 context_class.plugin_composite,
             )
-            item_name = self.name if example is NO_EXAMPLE else f'{self.name} (example={example})'
-            yield ContextsItem(item_name, context, self.obj, self.parent)
+            for assertion in context.assertions:
+                item_name = f'{self.name}.{assertion}'
+                if example != NO_EXAMPLE:
+                    item_name += f' (example={example})'
+                yield ContextsItem(item_name, context, assertion, self.obj, self.parent)
 
 
 
 class ContextsItem(pytest.Item):
 
-    def __init__(self, name, context, obj, parent):
-        self.context = context
+    def __init__(self, name, context, assertion, obj, parent):
         self.name = name
+        self.context = context
+        self.assertion = assertion
         self.obj = obj
         super().__init__(name, parent=parent)
 
     def reportinfo(self):
         path = inspect.getfile(self.obj)
-        return self.name, 0, f'{path}.{self.name}'
+        return self.name, 0, f'{path}:{self.name}'
 
     def setup(self):
         self.context.run_setup()
         self.context.run_action()
 
     def runtest(self):
-        # self.context.run_assertions()  #  this is swallowing exceptions by default
-        for assertion in self.context.assertions:
-            run_with_test_data(assertion.func, self.context.example)
+        run_with_test_data(self.assertion.func, self.context.example)
 
     def teardown(self):
         self.context.run_teardown()
