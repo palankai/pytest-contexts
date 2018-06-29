@@ -10,13 +10,8 @@ from contexts.core import (
 from contexts.plugins.identification import NameBasedIdentifier
 from contexts.plugins.identification.decorators import DecoratorBasedIdentifier
 
-print('boo')
-
-def pytest_collect_file(parent, path):
-    print('collect file')
-
 def pytest_pycollect_makeitem(collector, name, obj):
-    print('colllecting ' * 10)
+    print('colllecting', name, obj)
     if not inspect.isclass(obj):
         return
     if not name.lower().startswith('when'):

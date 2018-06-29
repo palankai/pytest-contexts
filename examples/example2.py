@@ -6,11 +6,10 @@ class IgnoreMe:
         assert 'should not see this'
 
 
-class Given_a_test_class:
+class When_we_have_a_test:
 
     def given_a_setup_method(self):
         self.given_run = True
-
 
     def when_things_happen(self):
         self.when_run = True
@@ -20,7 +19,7 @@ class Given_a_test_class:
         assert self.given_run is True
         assert self.when_run is True
 
-    def it_should_run_the_other_one_too(self):
+    def it_should_run_the_other_one_too_and_see_it_fail(self):
         assert self.given_run is True
         assert self.when_run is True
         assert 1 == 2
