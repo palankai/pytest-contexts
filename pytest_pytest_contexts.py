@@ -25,11 +25,11 @@ class ContextsCollector(pytest.Collector):
     def __init__(self, name, obj, parent):
         self.name = name
         self.obj = obj
+        self.path = inspect.getfile(self.obj)
         super().__init__(self.name, parent=parent)
 
     def reportinfo(self):
-        path = inspect.getfile(self.obj)
-        return self.name, 0, f'{path}.{self.name}'
+        return self.name, 0, f'{self.path}.{self.name}'
 
     def collect(self):
         context_class = TestClass(self.obj, PLUGINS)
@@ -47,22 +47,21 @@ class ContextsCollector(pytest.Collector):
                 item_name = f'{self.name}.{assertion.name}'
                 if example != NO_EXAMPLE:
                     item_name += f' (example={example})'
-                yield ContextsItem(item_name, context, assertion, self.obj, self.parent)
+                yield ContextsItem(item_name, context, assertion, self.path, self.parent)
 
 
 
 class ContextsItem(pytest.Item):
 
-    def __init__(self, name, context, assertion, obj, parent):
+    def __init__(self, name, context, assertion, path, parent):
         self.name = name
         self.context = context
         self.assertion = assertion
-        self.obj = obj
+        self.path = path
         super().__init__(name, parent=parent)
 
     def reportinfo(self):
-        path = inspect.getfile(self.obj)
-        return self.name, 0, f'{path}:{self.name}'
+        return self.name, 0, f'{self.path}:{self.name}'
 
     def setup(self):
         self.context.run_setup()
