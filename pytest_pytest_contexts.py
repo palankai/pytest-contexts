@@ -1,7 +1,6 @@
 import inspect
 import pathlib
 import pytest
-import contexts
 from contexts.core import (
     NO_EXAMPLE,
     Context,
