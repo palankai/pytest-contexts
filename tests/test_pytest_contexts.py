@@ -45,7 +45,8 @@ def test_cleanup(testdir):
     result = testdir.runpytest()
     assert 'CLEEEEEANING' in result.stdout.str()
 
-def test_spec(testdir):
+
+def test_Spec_works(testdir):
     example = dedent(
         """
         class MyTestSpec:
@@ -71,11 +72,13 @@ def test_only_runs_givens_and_cleanups_once_for_multiple_shoulds(testdir):
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
 
+
 def test_runs_cleanups_after_all_the_tests(testdir):
     example = pathlib.Path(__file__).parent / '../examples/example7.py'
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=2)
+
 
 def test_test_names(testdir):
     example = dedent(
@@ -95,14 +98,20 @@ def test_test_names(testdir):
 def test_sane_traceback(testdir):
     example = dedent(
         """
+        def myfn():
+            assert 1 == 2
+
         class WhenWeFail:
             def it_should_prune_tracebacks(self):
-                assert 1 == 2
+                myfn()
         """
     )
     testdir.makepyfile(example)
-    result = testdir.runpytest()
-    assert 'test_sane_traceback.py:WhenWeFail.it_should_prune_tracebacks' in result.stdout.str()
-    assert '/_pytest' not in result.stdout.str()
-    assert '/pluggy/' not in result.stdout.str()
-    assert '/pytest_pytest_contexts.py' not in result.stdout.str()
+    output = testdir.runpytest().stdout.str()
+    assert 'assert 1 == 2' in output
+    assert 'test_sane_traceback.py:6:' in output
+    assert 'test_sane_traceback.py:2:' in output
+    assert '/_pytest' not in output
+    assert '/pluggy/' not in output
+    assert '/pytest_pytest_contexts.py' not in output
+
