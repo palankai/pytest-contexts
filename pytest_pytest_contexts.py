@@ -79,5 +79,11 @@ class ContextsItem(pytest.Item):
         excinfo.traceback = excinfo.traceback.filter()
         this_filename = pathlib.Path(__file__).name
         excinfo.traceback = excinfo.traceback.filter(
-            lambda t: this_filename in str(t.path)
+            lambda t: this_filename not in str(t.path)
+        )
+        excinfo.traceback = excinfo.traceback.filter(
+            lambda t: '/_pytest' not in str(t.path)
+        )
+        excinfo.traceback = excinfo.traceback.filter(
+            lambda t: '/pluggy/' not in str(t.path)
         )

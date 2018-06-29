@@ -76,4 +76,6 @@ def test_sane_traceback(testdir):
     testdir.makepyfile(example)
     result = testdir.runpytest()
     assert 'test_sane_traceback.py:WhenWeFail.it_should_prune_tracebacks' in result.stdout.str()
-    assert result.stdout.str().count('/pytest_pytest_contexts.py') == 1
+    assert '/_pytest' not in result.stdout.str()
+    assert '/pluggy/' not in result.stdout.str()
+    assert '/pytest_pytest_contexts.py' not in result.stdout.str()
