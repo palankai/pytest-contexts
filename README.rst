@@ -10,7 +10,7 @@ pytest-contexts
     :target: https://pypi.org/project/pytest-contexts
     :alt: Python versions
 
-.. image:: https://travis-ci.org/hjwp/pytest-contexts.svg?branch=master
+.. image:: https://travis-ci.org/madedotcom/pytest-contexts.svg?branch=master
     :target: https://travis-ci.org/hjwp/pytest-contexts
     :alt: See Build Status on Travis CI
 
