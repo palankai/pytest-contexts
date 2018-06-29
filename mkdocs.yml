@@ -4,7 +4,7 @@ site_author: Harry Percival
 
 theme: readthedocs
 
-repo_url: https://github.com/hjwp/pytest-contexts
+repo_url: https://github.com/madedotcom/pytest-contexts
 
 pages:
 - Home: index.md

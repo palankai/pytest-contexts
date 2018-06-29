@@ -11,19 +11,17 @@ pytest-contexts
     :alt: Python versions
 
 .. image:: https://travis-ci.org/madedotcom/pytest-contexts.svg?branch=master
-    :target: https://travis-ci.org/hjwp/pytest-contexts
+    :target: https://travis-ci.org/madedotcom/pytest-contexts
     :alt: See Build Status on Travis CI
 
-A plugin to run tests written with the Contexts framework using pytest
+A plugin to run tests written with the `Contexts`_ framework using `pytest`_
 
 Usage
 -----
 
-First install with::
-
     pip install pytest-contexts
 
-Once you've installed it, `pytest`_ will find and run tests written using the contexts `Given/When/should` conventions.
+Once you've installed it, ``pytest`` will find and run tests written using the contexts *Given/When/should* conventions.
 
 Issues and PRs welcome.
 
@@ -41,4 +39,5 @@ This `pytest`_ plugin was generated with `Cookiecutter`_ along with `@hackebrot`
 .. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
 .. _`pytest`: https://github.com/pytest-dev/pytest
 .. _`Unlicense`: http://unlicense.org
+.. _`Contexts`: http://contexts.readthedocs.io/
 

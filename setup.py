@@ -19,7 +19,7 @@ setup(
     maintainer='Harry Percival',
     maintainer_email='obeythetestinggoat@gmail.com',
     license='GNU GPL v3.0',
-    url='https://github.com/hjwp/pytest-contexts',
+    url='https://github.com/madedotcom/pytest-contexts',
     description='A plugin to run tests written with the Contexts framework using pytest',
     long_description=read('README.rst'),
     py_modules=['pytest_pytest_contexts'],
