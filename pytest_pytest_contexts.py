@@ -59,13 +59,17 @@ class ContextsItem(pytest.Item):
         self.assertion = assertion
         self.path = path
         super().__init__(name, parent=parent)
+        self.context.setup_run = False
 
     def reportinfo(self):
         return self.name, 0, f'{self.path}:{self.name}'
 
     def setup(self):
+        if self.context.setup_run:
+            return
         self.context.run_setup()
         self.context.run_action()
+        self.context.setup_run = True
 
     def runtest(self):
         run_with_test_data(self.assertion.func, self.context.example)

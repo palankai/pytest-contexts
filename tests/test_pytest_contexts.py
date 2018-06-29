@@ -1,5 +1,4 @@
 from textwrap import dedent
-import tempfile
 import pathlib
 
 def test_basic_given_when_should(testdir):
@@ -64,6 +63,13 @@ def test_decorators(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1)
+
+
+def test_only_runs_givens_and_cleanups_once_for_multiple_shoulds(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example6.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=2)
 
 
 def test_test_names(testdir):
