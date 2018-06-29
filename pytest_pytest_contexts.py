@@ -1,5 +1,7 @@
 import inspect
+import pathlib
 import pytest
+import contexts
 from contexts.core import (
     NO_EXAMPLE,
     Context,
@@ -72,3 +74,11 @@ class ContextsItem(pytest.Item):
 
     def teardown(self):
         self.context.run_teardown()
+
+    def _prunetraceback(self, excinfo):
+        super()._prunetraceback(excinfo)
+        excinfo.traceback = excinfo.traceback.filter()
+        this_filename = pathlib.Path(__file__).name
+        excinfo.traceback = excinfo.traceback.filter(
+            lambda t: this_filename in str(t.path)
+        )
