@@ -10,10 +10,12 @@ from contexts.core import (
 from contexts.plugins.identification import NameBasedIdentifier
 from contexts.plugins.identification.decorators import DecoratorBasedIdentifier
 
+PLUGINS = PluginComposite([DecoratorBasedIdentifier(), NameBasedIdentifier()])
+
 def pytest_pycollect_makeitem(collector, name, obj):
     if not inspect.isclass(obj):
         return
-    if NameBasedIdentifier().identify_class(obj):
+    if PLUGINS.identify_class(obj):
         return ContextsCollector(name, obj=obj, parent=collector)
 
 
@@ -29,8 +31,7 @@ class ContextsCollector(pytest.Collector):
         return self.name, 0, f'{path}.{self.name}'
 
     def collect(self):
-        plugins = PluginComposite([DecoratorBasedIdentifier(), NameBasedIdentifier()])
-        context_class = TestClass(self.obj, plugins)
+        context_class = TestClass(self.obj, PLUGINS)
         for example in context_class.get_examples():
             context = Context(
                 context_class.cls(),

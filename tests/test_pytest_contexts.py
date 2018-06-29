@@ -42,3 +42,9 @@ def test_spec(testdir):
     result = testdir.runpytest()
     result.assert_outcomes(passed=1)
 
+
+def test_decorators(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example5.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=1)
