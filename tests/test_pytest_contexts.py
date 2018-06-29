@@ -1,3 +1,4 @@
+from textwrap import dedent
 import pathlib
 
 def test_basic_given_when_should(testdir):
@@ -27,3 +28,17 @@ def test_examples(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
+
+
+def test_spec(testdir):
+    example = dedent(
+        """
+        class MyTestSpec:
+            def it_should_be_run(self):
+                assert True
+        """
+    )
+    testdir.makepyfile(example)
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=1)
+

@@ -13,9 +13,8 @@ from contexts.plugins.identification.decorators import DecoratorBasedIdentifier
 def pytest_pycollect_makeitem(collector, name, obj):
     if not inspect.isclass(obj):
         return
-    if not name.lower().startswith('when'):
-        return
-    return ContextsCollector(name, obj=obj, parent=collector)
+    if NameBasedIdentifier().identify_class(obj):
+        return ContextsCollector(name, obj=obj, parent=collector)
 
 
 class ContextsCollector(pytest.Collector):
