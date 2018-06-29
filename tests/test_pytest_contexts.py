@@ -1,4 +1,5 @@
 from textwrap import dedent
+import tempfile
 import pathlib
 
 def test_basic_given_when_should(testdir):
@@ -29,6 +30,21 @@ def test_examples(testdir):
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
 
+
+def test_cleanup(testdir):
+    example = dedent(
+        """
+        class WhenWeSeeTestOutput:
+            def it_should_have_a_nice_name(self):
+                assert 1 == 2
+
+            def cleanup_temp_file(self):
+                print('CLEEEEEANING')
+        """
+    )
+    testdir.makepyfile(example)
+    result = testdir.runpytest()
+    assert 'CLEEEEEANING' in result.stdout.str()
 
 def test_spec(testdir):
     example = dedent(
