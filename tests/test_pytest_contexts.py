@@ -27,3 +27,9 @@ def test_examples(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
+
+def test_errors(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example5.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(error=1)
