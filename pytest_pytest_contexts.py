@@ -43,7 +43,7 @@ class ContextsCollector(pytest.Collector):
                 context_class.plugin_composite,
             )
             for assertion in context.assertions:
-                item_name = f'{self.name}.{assertion}'
+                item_name = f'{self.name}.{assertion.name}'
                 if example != NO_EXAMPLE:
                     item_name += f' (example={example})'
                 yield ContextsItem(item_name, context, assertion, self.obj, self.parent)

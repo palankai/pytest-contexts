@@ -1,4 +1,5 @@
 from textwrap import dedent
+import contexts
 import pathlib
 
 def test_basic_given_when_should(testdir):
@@ -48,3 +49,31 @@ def test_decorators(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1)
+
+
+def test_test_names(testdir):
+    example = dedent(
+        """
+        class WhenWeSeeTestOutput:
+            def it_should_have_a_nice_name(self):
+                assert 1 == 2
+        """
+    )
+    testdir.makepyfile(example)
+    result = testdir.runpytest()
+    assert 'test_test_names.py:WhenWeSeeTestOutput.it_should_have_a_nice_name' in result.stdout.str()
+
+
+def test_sane_traceback(testdir):
+    example = dedent(
+        """
+        class WhenWeFail:
+            def it_should_prune_tracebacks(self):
+                assert 1 == 2
+        """
+    )
+    testdir.makepyfile(example)
+    result = testdir.runpytest()
+    assert 'test_sane_traceback.py:WhenWeFail.it_should_prune_tracebacks' in result.stdout.str()
+    assert result.stdout.str().count('/pytest_pytest_contexts.py') == 1
+
