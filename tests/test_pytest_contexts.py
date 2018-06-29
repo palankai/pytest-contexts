@@ -13,3 +13,10 @@ def test_two_shoulds_and_one_ignorable_class(testdir):
     testdir.makepyfile(example.read_text())
     result = testdir.runpytest()
     result.assert_outcomes(passed=1, failed=1)
+
+
+def test_we_still_run_regular_pytest_scripts(testdir):
+    example = pathlib.Path(__file__).parent / '../examples/example3.py'
+    testdir.makepyfile(example.read_text())
+    result = testdir.runpytest()
+    result.assert_outcomes(passed=2)
