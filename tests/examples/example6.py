@@ -9,9 +9,9 @@ class When_we_have_a_test:
     def when_things_happen(self):
         when_calls.append(1)
 
-    def it_should_run_one_method(self):
+    def it_should_see_the_givens_run_once_from_the_first_assert(self):
         assert sum(given_calls) == 1
 
-    def it_should_run_the_other_one_too_and_see_it_fail(self):
+    def it_should_also_see_the_givens_run_once_in_the_second(self):
         assert sum(given_calls) == 1
 
