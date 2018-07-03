@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='pytest-contexts',
-    version='0.1.0',
+    version='0.1.1',
     author='Harry Percival',
     author_email='obeythetestinggoat@gmail.com',
     maintainer='Harry Percival',
