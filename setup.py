@@ -22,7 +22,7 @@ setup(
     url='https://github.com/madedotcom/pytest-contexts',
     description='A plugin to run tests written with the Contexts framework using pytest',
     long_description=read('README.rst'),
-    py_modules=['pytest_pytest_contexts'],
+    py_modules=['pytest_contexts'],
     python_requires='>=3.6',
     install_requires=['pytest', 'contexts'],
     classifiers=[
@@ -38,7 +38,7 @@ setup(
     ],
     entry_points={
         'pytest11': [
-            'contexts = pytest_pytest_contexts',
+            'contexts = pytest_contexts',
         ],
     },
 )
