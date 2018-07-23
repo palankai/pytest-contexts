@@ -1,28 +1,26 @@
-# Config file for automatic testing at travis-ci.org
-
 sudo: false
 language: python
-
 matrix:
-    include:
-      - python: 3.6
-        env: TOX_ENV=py36
-      - python: 3.6
-        env: TOX_ENV=flake8
-      - python: 3.7
-        env: TOX_ENV=py37
-        sudo: required
-        dist: xenial
-
+  include:
+  - python: 3.6
+    env: TOX_ENV=py36
+  - python: 3.6
+    env: TOX_ENV=flake8
+  - python: 3.7
+    env: TOX_ENV=py37
+    sudo: required
+    dist: xenial
 install:
-  - pip install tox
-
+- pip install tox
 script:
-  - tox -e $TOX_ENV
-
+- tox -e $TOX_ENV
 before_cache:
-  - rm -rf $HOME/.cache/pip/log
-
+- rm -rf $HOME/.cache/pip/log
 cache:
   directories:
-    - $HOME/.cache/pip
+  - "$HOME/.cache/pip"
+deploy:
+  provider: pypi
+  user: madedotcom
+  password:
+    secure: HShIv7tpToAXuc6Z2TgZyngMBzE/GMFArRuboLALTsz1tzg+oMTXvBg0RYBMA5clC3s10WyWJj9Y+fAXOzi19tUeFQdwquv4HszRXje3nBr5kOdAr5czH+PTwnxCLjp02/dzWWpBnlCpQd0csN+JGwvJnL3x7ICCCJjZG23CEPW++SW5Fu5NxQBHpeLJLKqBnQndgaORGCHzrO2nXxL6x70/+cVL6GwLrb4KVUpcXbLoM5m/TRj7bHErQZZIbsa5uHfiUEOzIcNzR630xDsR/KZjKRwNfEgc/uF5zYWieF+NcJoog76zSdgY1Npf/0o5mCeoriqE10yBKsTcHHt108z+9hP6rYjos/ahFIDXNaLVgM+qFrjpxblmSlpuyQv/m2HKaslHcQFpXtl+t5nxRu+ssr/tUzzg8kbawqgTbjbZPLJshB5NAqXf5K5Td8X5GTFCo8ILC1DICbF3alT7Vke0N82Stjlw/6TrhXb58PyjxPDJtCwF6yq+h9p1+0v9huwgPg7ZWyjtStjrunzJvctd2ht7ht+/3mDT9kN6OTZjAgwPCGAhbFh7RKvPpD8FhW38CX8ApJh7Z/d9C9kwxKLnKpGUJfWgJkdpkU/UIp6maDuSHHzIGS+WrTppOgi4hznHHZZmEDRNrIMWRwHdKFUkEa1H1bLMJx0lPmjA9KI=
