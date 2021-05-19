@@ -14,10 +14,11 @@ from contexts.plugins.identification.decorators import DecoratorBasedIdentifier
 PLUGINS = PluginComposite([DecoratorBasedIdentifier(), NameBasedIdentifier()])
 
 def pytest_pycollect_makeitem(collector, name, obj):
-    if not inspect.isclass(obj):
+    if not inspect.isclass(obj) or not PLUGINS.identify_class(obj):
         return
-    if PLUGINS.identify_class(obj):
-        return ContextsCollector(name, obj=obj, parent=collector)
+    if hasattr(ContextsCollector, 'from_parent'):
+        return ContextsCollector.from_parent(collector, name=name, obj=obj)
+    return ContextsCollector(name, obj=obj, parent=collector)
 
 
 class ContextsCollector(pytest.Collector):
@@ -47,7 +48,17 @@ class ContextsCollector(pytest.Collector):
                 item_name = f'{self.name}.{assertion.name}'
                 if example != NO_EXAMPLE:
                     item_name += f' (example={example})'
-                yield ContextsItem(item_name, context, assertion, self.path, self.parent)
+                if hasattr(ContextsItem, 'from_parent'):
+                    item = ContextsItem.from_parent(
+                        self.parent,
+                        name=item_name,
+                        context=context,
+                        assertion=assertion,
+                        path=self.path,
+                    )
+                else:
+                    item = ContextsItem(item_name, context, assertion, self.path, self.parent)
+                yield item
 
 
 
