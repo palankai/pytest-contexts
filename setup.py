@@ -24,7 +24,7 @@ setup(
     long_description=read('README.rst'),
     py_modules=['pytest_contexts'],
     python_requires='>=3.6',
-    install_requires=['pytest', 'contexts'],
+    install_requires=['pytest<6', 'contexts'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Pytest',
